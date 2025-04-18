@@ -7,6 +7,8 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
+include_directories(SYSTEM include)
+
 find_package(GTest)
 if( NOT GTest_FOUND)
   include(FetchContent)
@@ -22,6 +24,9 @@ include(GoogleTest)
 
 enable_testing()
 
+add_subdirectory(src)
+
 # Final executable tinycc
 add_executable(tinycc main.cpp)
+target_link_libraries(tinycc tinyccLexer tinyccParser)
 
